@@ -25,6 +25,7 @@ class RoomInventory {
         } else {
             System.out.println("Room type not found.");
         }
+
     }
 
     // Display current inventory
@@ -52,5 +53,6 @@ public class BookMyStayApp {
 
         // Display updated inventory
         inventory.displayInventory();
+        System.out.println();
     }
 }
