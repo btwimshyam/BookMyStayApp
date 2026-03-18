@@ -13,34 +13,32 @@ class Room {
 public class BookMyStayApp {
     public static void main(String[] args) {
 
-        // Room list (sample data)
         Room[] rooms = {
                 new Room(101, "Single", true),
                 new Room(102, "Double", true),
-                new Room(103, "Single", false),
-                new Room(104, "Suite", true)
+                new Room(103, "Suite", false)
         };
 
-        String requestType = "Single";
-        boolean booked = false;
+        String requestType = "Double";
+        boolean confirmed = false;
 
-        System.out.println("Booking request for: " + requestType);
+        System.out.println("Reservation Request for: " + requestType);
 
-        // FCFS booking
-        for (int i = 0; i < rooms.length; i++) {
-            if (rooms[i].type.equalsIgnoreCase(requestType) && rooms[i].isAvailable) {
-                rooms[i].isAvailable = false; // book the room
+        for (Room r : rooms) {
+            if (r.type.equalsIgnoreCase(requestType) && r.isAvailable) {
 
-                System.out.println("Booking Successful!");
-                System.out.println("Allocated Room ID: " + rooms[i].roomId);
+                r.isAvailable = false; // allocate room
 
-                booked = true;
-                break; // First-Come-First-Serve → stop after first match
+                System.out.println("Reservation Confirmed!");
+                System.out.println("Room Allocated: " + r.roomId);
+
+                confirmed = true;
+                break;
             }
         }
 
-        if (!booked) {
-            System.out.println("No rooms available for the requested type.");
+        if (!confirmed) {
+            System.out.println("Reservation Failed - No rooms available");
         }
     }
 }
