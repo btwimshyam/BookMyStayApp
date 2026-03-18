@@ -1,24 +1,45 @@
+import java.util.*;
+
+class Reservation {
+    String guestName;
+    String roomType;
+
+    public Reservation(String guestName, String roomType) {
+        this.guestName = guestName;
+        this.roomType = roomType;
+    }
+
+    public String toString() {
+        return guestName + " - " + roomType;
+    }
+}
+
+class BookingHistory {
+    private List<Reservation> confirmedReservations;
+
+    public BookingHistory() {
+        confirmedReservations = new ArrayList<>();
+    }
+
+    public void addReservation(Reservation r) {
+        confirmedReservations.add(r);
+    }
+
+    public List<Reservation> getConfirmedReservations() {
+        return confirmedReservations;
+    }
+}
+
 public class BookMyStayApp {
     public static void main(String[] args) {
+        BookingHistory history = new BookingHistory();
 
-        String[] services = {"Breakfast", "WiFi", "Airport Pickup"};
-        boolean[] selected = {true, false, true};
+        history.addReservation(new Reservation("Shyam", "Deluxe"));
+        history.addReservation(new Reservation("Gokul", "Standard"));
 
-        int totalCost = 0;
-
-        System.out.println("Selected Add-On Services:");
-
-        for (int i = 0; i < services.length; i++) {
-            if (selected[i]) {
-                System.out.println(services[i]);
-
-                // simple pricing
-                if (services[i].equals("Breakfast")) totalCost += 200;
-                if (services[i].equals("WiFi")) totalCost += 100;
-                if (services[i].equals("Airport Pickup")) totalCost += 500;
-            }
+        System.out.println("Booking History:");
+        for (Reservation r : history.getConfirmedReservations()) {
+            System.out.println(r);
         }
-
-        System.out.println("Total Add-On Cost: ₹" + totalCost);
     }
 }
