@@ -1,44 +1,24 @@
-class Room {
-    int roomId;
-    String type;
-    boolean isAvailable;
-
-    Room(int roomId, String type, boolean isAvailable) {
-        this.roomId = roomId;
-        this.type = type;
-        this.isAvailable = isAvailable;
-    }
-}
-
 public class BookMyStayApp {
     public static void main(String[] args) {
 
-        Room[] rooms = {
-                new Room(101, "Single", true),
-                new Room(102, "Double", true),
-                new Room(103, "Suite", false)
-        };
+        String[] services = {"Breakfast", "WiFi", "Airport Pickup"};
+        boolean[] selected = {true, false, true};
 
-        String requestType = "Double";
-        boolean confirmed = false;
+        int totalCost = 0;
 
-        System.out.println("Reservation Request for: " + requestType);
+        System.out.println("Selected Add-On Services:");
 
-        for (Room r : rooms) {
-            if (r.type.equalsIgnoreCase(requestType) && r.isAvailable) {
+        for (int i = 0; i < services.length; i++) {
+            if (selected[i]) {
+                System.out.println(services[i]);
 
-                r.isAvailable = false; // allocate room
-
-                System.out.println("Reservation Confirmed!");
-                System.out.println("Room Allocated: " + r.roomId);
-
-                confirmed = true;
-                break;
+                // simple pricing
+                if (services[i].equals("Breakfast")) totalCost += 200;
+                if (services[i].equals("WiFi")) totalCost += 100;
+                if (services[i].equals("Airport Pickup")) totalCost += 500;
             }
         }
 
-        if (!confirmed) {
-            System.out.println("Reservation Failed - No rooms available");
-        }
+        System.out.println("Total Add-On Cost: ₹" + totalCost);
     }
 }
